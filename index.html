@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>D-Day 4.29 투자 공부 플랜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F6; --paper:#F8FAFC; --ink:#18263A; --muted:#5A6A7E; --line:#C8D2DE;
+  --amber:#D99A00; --amber-soft:#FBEFC8; --done:#2E7A58; --done-soft:#D9EFE4; --exam:#8A5CC2;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101823; --paper:#172231; --ink:#E4EAF1; --muted:#95A4B6; --line:#2B3A4D;
+    --amber:#F0B429; --amber-soft:#3A3016; --done:#5CC495; --done-soft:#17392B; --exam:#B592E6;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101823; --paper:#172231; --ink:#E4EAF1; --muted:#95A4B6; --line:#2B3A4D;
+  --amber:#F0B429; --amber-soft:#3A3016; --done:#5CC495; --done-soft:#17392B; --exam:#B592E6;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:28px 18px 64px}
+header h1{font-size:15px;font-weight:500;color:var(--muted);margin:0 0 4px}
+.count{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.count b{font-size:64px;line-height:1;font-weight:700;letter-spacing:-2px}
+.count span{color:var(--muted)}
+.tape{display:grid;grid-template-columns:repeat(auto-fill,minmax(7px,1fr));gap:2px;margin:22px 0 8px}
+.tape button{all:unset;cursor:pointer;height:22px;border-radius:1px;background:var(--line)}
+.tape button.past{background:color-mix(in srgb,var(--line) 55%,var(--muted))}
+.tape button.ok{background:var(--done)}
+.tape button.now{background:var(--amber);outline:2px solid var(--amber);outline-offset:1px}
+.tape button:focus-visible{outline:2px solid var(--ink)}
+.legend{font-size:13px;color:var(--muted)}
+.today{margin:28px 0;background:var(--paper);border-left:4px solid var(--amber);padding:18px 18px 16px;border-radius:0 6px 6px 0}
+.today h2{margin:0 0 2px;font-size:14px;font-weight:500;color:var(--muted)}
+.today .task{font-size:19px;font-weight:500;margin:6px 0 12px}
+.btn{font:inherit;font-size:15px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:8px 14px;border-radius:4px;cursor:pointer}
+.btn.on{background:var(--done);border-color:var(--done);color:#fff}
+.btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+h3.sec{font-size:20px;margin:40px 0 6px}
+p.sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+.phase{font-size:13px;font-weight:700;color:var(--muted);margin:26px 0 6px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:12px 2px;display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible{outline:2px solid var(--amber)}
+.wk{font-weight:700;font-variant-numeric:tabular-nums}
+.wt{font-weight:500}
+.wd{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{font-size:12px;padding:1px 6px;border-radius:3px;margin-left:6px;white-space:nowrap}
+.tag.exam{color:var(--exam);border:1px solid var(--exam)}
+.tag.vac{color:var(--done);border:1px solid var(--done)}
+.tag.hol{color:var(--amber);border:1px solid var(--amber)}
+.pct{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.note{font-size:14px;color:var(--muted);margin:0 0 8px 54px}
+ul.days{list-style:none;margin:0 0 14px;padding:0}
+ul.days li{display:grid;grid-template-columns:28px 64px 1fr;gap:8px;padding:8px 2px;align-items:start;border-radius:4px}
+ul.days li.is-today{background:var(--amber-soft)}
+ul.days li.is-done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+ul.days input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--done)}
+.dl{font-size:13px;line-height:1.35;font-variant-numeric:tabular-nums}
+.dl small{display:block;color:var(--muted)}
+.books{display:grid;gap:14px}
+.book{background:var(--paper);padding:14px 16px;border-radius:6px}
+.book b{display:block}
+.book .by{font-size:13px;color:var(--muted)}
+.book p{margin:6px 0 0;font-size:14px}
+.rules li{margin:0 0 8px}
+.foot{font-size:13px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:14px}
+.foot a{color:var(--muted)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+@media (prefers-reduced-motion:no-preference){ul.days li{transition:background .2s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2026년 9월 21일 시작, 2027년 4월 29일 실전 투자 시작</h1>
+  <div class="count"><b id="dd">D-0</b><span id="ddsub"></span></div>
+  <div class="tape" id="tape" aria-label="날짜별 진행 표시"></div>
+  <div class="legend">칸 하나가 하루입니다. 초록은 완료, 노랑은 오늘. 칸을 누르면 그날로 이동합니다.</div>
+</header>
+
+<section class="today" id="today" aria-live="polite"></section>
+
+<h3 class="sec">주차별 하루 목표</h3>
+<p class="sub">학기 중: 월·수 45분, 화 15분(멘토링 날), 목 40분(이동 시간), 금 90분(PT 후 오후), 토 15분, 일 60분(오후 5시 조교 전). 방학 중: 평일 90분, 토 20분, 일 60분. 시험 주간 날짜는 예상치이니 실제 학사일정에 맞춰 옮기세요.</p>
+<div id="weeks"></div>
+
+<h3 class="sec">교재</h3>
+<p class="sub">읽는 순서대로입니다. 모두 국내 번역·출간본이 있고, 마지막 두 항목은 무료 자료입니다.</p>
+<div class="books">
+  <div class="book"><b>돈의 심리학</b><span class="by">모건 하우절, 인플루엔셜</span><p>1~2주차. 투자 기술보다 먼저 태도를 잡는 책. 짧은 장 20개라 입문용으로 부담이 없습니다.</p></div>
+  <div class="book"><b>재무제표 모르면 주식투자 절대로 하지 마라</b><span class="by">사경인, 베가북스</span><p>3~6주차. 손익계산서, 재무상태표, 현금흐름표를 투자자 관점에서 읽는 법. 이후 모든 분석의 바탕입니다.</p></div>
+  <div class="book"><b>현명한 투자자</b><span class="by">벤저민 그레이엄, 국일증권경제연구소</span><p>7~10주차. 가치투자의 원전. 8장(미스터 마켓)과 20장(안전마진)은 정독, 나머지는 해설 위주로 속도를 냅니다.</p></div>
+  <div class="book"><b>전설로 떠나는 월가의 영웅</b><span class="by">피터 린치, 국일증권경제연구소</span><p>11~14주차. 기업 6가지 유형 분류와 '2분 스토리'. 개별 종목 발굴의 실전 교과서입니다.</p></div>
+  <div class="book"><b>투자에 대한 생각</b><span class="by">하워드 막스, 비즈니스맵</span><p>15~16주차. 리스크와 시장 사이클. 장기투자에서 버티는 힘을 줍니다.</p></div>
+  <div class="book"><b>금융시장의 기술적 분석</b><span class="by">존 J. 머피, 국일증권경제연구소</span><p>18~19주차. 기술적 분석의 표준 교재. 전부 읽지 않고 추세, 패턴, 거래량, 이동평균, 오실레이터, 자금관리 파트만 봅니다.</p></div>
+  <div class="book"><b>초수익 성장주 투자</b><span class="by">마크 미너비니, 이레미디어</span><p>20~21주차. 스윙의 뼈대. 주가 4단계, 트렌드 템플릿, VCP, 손절과 포지션 사이징.</p></div>
+  <div class="book"><b>비트코인, 블록체인과 금융의 혁신</b><span class="by">안드레아스 안토노풀로스 (Mastering Bitcoin 번역서)</span><p>23~24주차. 비트코인이 실제로 어떻게 작동하는지. 개발 코드 부분은 건너뛰어도 됩니다.</p></div>
+  <div class="book"><b>무료 자료</b><span class="by">비트코인 백서, SEC EDGAR 10-K, 버크셔 해서웨이 주주서한, 다모다란 NYU 밸류에이션 강의(유튜브), TradingView 페이퍼 트레이딩</span><p>책과 병행합니다. 10-K와 주주서한은 AI에게 요약을 시키되, 핵심 장은 직접 읽고 요약을 대조하세요.</p></div>
+</div>
+
+<h3 class="sec">4월 29일 전에 확정할 것</h3>
+<ol class="rules">
+  <li>장기·가치 / 스윙 / 코인 비중과 계좌 분리 방식</li>
+  <li>스윙 1회 최대 손실 한도(전체 자금의 1~2% 이내)와 손절 규칙</li>
+  <li>처음 3개월은 소액으로만, 모의투자 성과와 비교한 뒤 증액</li>
+  <li>세금: 해외주식 양도차익 연 250만 원 공제 후 22%(다음 해 5월 신고), 가상자산 과세 시행 여부 최종 확인</li>
+</ol>
+
+<div class="tools">
+  <button class="btn" id="exp">완료 기록 내보내기</button>
+  <button class="btn" id="rst">완료 기록 초기화</button>
+</div>
+
+<p class="foot">체크 기록은 이 기기의 브라우저에만 저장됩니다. 이 플랜은 공부 계획이며 특정 종목의 매수·매도 권유가 아닙니다.<br>
+참고: <a href="https://support.upbit.com/hc/ko/articles/900005872026" target="_blank" rel="noopener">업비트 미성년자 가입 안내</a>, <a href="https://www.bloter.net/news/articleView.html?idxno=669414" target="_blank" rel="noopener">가상자산 과세 2027년 시행 관련 기사</a></p>
+</div>
+
+<script>
+const SEM=[45,15,45,40,90,15,60], VAC=[90,90,90,90,90,20,60], EXAM=[10,10,10,10,15,10,10];
+const TUE="시장 체크: S&P500, 나스닥, BTC 주간 등락과 뉴스 헤드라인 3개 기록";
+const SAT="주말 시장 체크: BTC, ETH 가격과 이번 주 이슈 한 줄";
+const EX="시험 주간: 용어 카드 10분 복습만";
+const W=[
+{p:"준비와 태도",s:"2026-09-21",t:"세팅, 돈의 심리학",m:"hol",n:"추석 연휴(9/24~26)에 독서를 몰아서 합니다.",d:[
+"노션이나 스프레드시트에 투자 노트와 매매일지 표(날짜, 종목, 진입 이유, 손절, 목표, 결과) 만들기",null,
+"TradingView 가입, 관심 목록 만들기(SPY, QQQ, BTCUSD, ETHUSD와 아는 기업 5개)",
+"추석: 『돈의 심리학』 1~4장","추석: 『돈의 심리학』 5~8장, 복리 개념 한 줄 정리","추석: 『돈의 심리학』 9~12장",
+"『돈의 심리학』 13~16장, 주간 복기 양식 첫 작성"]},
+{s:"2026-09-28",t:"돈의 심리학 완독, 시장 기초",m:"sem",d:[
+"『돈의 심리학』 17~20장 완독, 가장 와닿은 문장 3개와 이유",null,
+"주식, 채권, ETF, 인덱스 차이를 내 말로 한 페이지 정리",
+"이동 중: S&P500 구성 방식(시가총액 가중)과 편입 기준 학습",
+"실습: SPY, VOO, QQQ의 보수와 상위 10개 종목 비교표 만들기",null,
+"주간 복기, '나는 왜 투자하는가' 원칙 문서 작성"]},
+{p:"재무제표",s:"2026-10-05",t:"재무제표 ① 손익계산서",m:"sem",n:"10/9 한글날 금요일은 실습에 씁니다.",d:[
+"『재무제표 모르면 주식투자 절대로 하지 마라』 전체의 1/8",null,
+"다음 1/8, 매출에서 순이익까지 흐름도 그리기",
+"이동 중: 읽은 부분 복습, 모르는 용어 5개 정리",
+"실습: 애플 최근 3년 손익계산서를 표로 옮기고 매출총이익률, 영업이익률 계산",null,
+"주간 복기, 계산 결과를 AI에게 검산 요청해 틀린 곳 확인"]},
+{s:"2026-10-12",t:"재무제표 ② 재무상태표",m:"sem",d:[
+"같은 책 3/8 지점까지",null,
+"4/8 지점까지, 자산=부채+자본 구조와 유동비율, 부채비율 정리",
+"이동 중: ROE, ROA와 듀폰 분해 개념",
+"실습: 애플과 마이크로소프트 재무상태표 비교, 부채비율과 ROE 계산",null,
+"주간 복기"]},
+{s:"2026-10-19",t:"중간고사 주간",m:"exam",n:"예상 일정입니다. 실제 시험 주로 옮기세요.",d:[
+EX,null,EX,"이동 중: 현금흐름표 개념 영상 1개(영업, 투자, 재무 현금흐름)","휴식 또는 15분 시장 체크",null,"5분 주간 복기"]},
+{s:"2026-10-26",t:"재무제표 ③ 현금흐름, 완독",m:"sem",d:[
+"같은 책 6/8 지점까지",null,
+"완독, 잉여현금흐름(FCF = 영업현금흐름 − 설비투자) 정리",
+"이동 중: SEC EDGAR 사용법, 10-K 목차(Item 1, 1A, 7, 8) 파악",
+"실습: 애플 10-K에서 재무제표 3종을 직접 찾아 FCF 5년치 계산",null,
+"재무제표 한 장 요약 노트 완성"]},
+{p:"가치투자",s:"2026-11-02",t:"현명한 투자자 ①",m:"sem",d:[
+"『현명한 투자자』 서문, 1장(투자와 투기)",null,
+"2~3장(인플레이션, 100년 시장 역사)",
+"이동 중: 1~3장 해설(츠바이크 논평)",
+"4~5장(방어적 투자자의 포트폴리오), 방어적 투자자 기준 메모",null,
+"주간 복기, '나는 방어적인가 공격적인가' 한 문단"]},
+{s:"2026-11-09",t:"현명한 투자자 ②",m:"sem",d:[
+"6~7장(공격적 투자자가 피할 것과 할 것)",null,
+"8장(투자자와 시장 변동, 미스터 마켓) 정독",
+"이동 중: 버크셔 해서웨이 최근 주주서한 앞부분",
+"9~10장 훑기, 미스터 마켓 비유를 내 사례로 다시 쓰기",null,"주간 복기"]},
+{s:"2026-11-16",t:"현명한 투자자 ③",m:"sem",d:[
+"11~12장(증권 분석 기초, 주당순이익)",null,
+"13~14장(기업 비교, 방어적 투자자의 종목 선정)",
+"이동 중: 주주서한 이어 읽기",
+"실습: 14장 기준을 관심 기업 3곳에 적용한 체크리스트 표",null,"주간 복기"]},
+{s:"2026-11-23",t:"현명한 투자자 ④",m:"sem",d:[
+"15장(공격적 투자자의 종목 선정)",null,
+"16~19장 훑기, 20장(안전마진) 정독",
+"이동 중: 안전마진을 다른 자료로 한 번 더",
+"실습: 관심 기업 1곳을 PER, PBR, 배당수익률로 비싼지 싼지 판단",null,
+"『현명한 투자자』 핵심 10줄 요약"]},
+{s:"2026-11-30",t:"월가의 영웅 ①",m:"sem",d:[
+"『전설로 떠나는 월가의 영웅』 프롤로그, 1부 앞부분",null,
+"1부 완독(아마추어의 이점, 투자 전 점검)",
+"이동 중: 내가 쓰는 제품과 서비스 중 미국 상장사 10개 찾기",
+"2부: 기업 6가지 유형(저성장, 대형우량, 고성장, 경기순환, 회생, 자산주) 정리",null,
+"10개 기업을 6가지 유형으로 분류"]},
+{s:"2026-12-07",t:"월가의 영웅 ②",m:"sem",d:[
+"2부 이어서: 완벽한 종목의 조건, 피해야 할 종목",null,
+"2부 완독: 2분 스토리, 재무 점검 항목",
+"이동 중: 기말 대비로 10분 복습만",
+"실습: 관심 기업 1곳의 2분 스토리(무엇을 파는지, 왜 성장하는지, 리스크)",null,"주간 복기"]},
+{s:"2026-12-14",t:"기말고사 주간",m:"exam",n:"예상 일정입니다.",d:[
+EX,null,EX,EX,"휴식 또는 15분 시장 체크",null,"학기 복기: 배운 것 1페이지 정리, 방학 목표 확인"]},
+{p:"겨울방학: 기업분석과 밸류에이션",s:"2026-12-21",t:"월가의 영웅 완독, 기업분석 1",m:"vac",d:[
+"『전설로 떠나는 월가의 영웅』 3부 완독",
+"기업분석 1: 대형 우량주 1곳 선정, 10-K Item 1(사업) 읽고 5줄 요약",
+"Item 1A(리스크 요인) 읽고 핵심 리스크 5개",
+"Item 7(경영진 분석) 읽기",
+"5년 재무표: 매출, 영업이익, 순이익, FCF, 부채","주간 시장 체크",
+"투자 메모 v1(1페이지): 사업, 해자, 숫자, 리스크, 적정가 감각"]},
+{s:"2026-12-28",t:"투자에 대한 생각 ①",m:"vac",n:"1/1 신정은 쉬어도 됩니다.",d:[
+"『투자에 대한 생각』 1~5장(2차적 사고, 효율시장, 가치와 가격, 리스크)",
+"6~8장(리스크 인식과 통제)",
+"9~10장(사이클, 진자), 사이클 도식 그리기",
+"다모다란 NYU 밸류에이션 강의 1강",
+"신정: 휴식 또는 연간 목표 점검",null,
+"2차적 사고 예시 3개 만들기"]},
+{s:"2027-01-04",t:"투자에 대한 생각 ②, 밸류에이션",m:"vac",d:[
+"11~15장(역발상, 헐값 찾기, 인내)","16~20장 완독",
+"다모다란 강의 2강: 할인율과 현금흐름 할인",
+"상대가치(PER)와 절대가치(DCF) 차이 정리",
+"실습: 기업분석 1 기업으로 간단 DCF(비관, 기본, 낙관 3개 시나리오)",null,
+"역DCF: 현재 주가가 가정하는 성장률 계산, 메모 v2"]},
+{s:"2027-01-11",t:"장기 포트폴리오 설계, 기업분석 2",m:"vac",d:[
+"ETF 심화: 분배금, 환헤지, 추적오차, 미국 상장과 국내 상장 해외 ETF의 세금 차이",
+"자산배분 기초: 주식, 채권, 현금 비중과 리밸런싱 규칙",
+"기업분석 2: 고성장주 1곳, 10-K Item 1과 1A",
+"기업분석 2: 5년 재무표",
+"모의 장기 포트폴리오 구성(가상 금액): ETF 중심 + 개별주 2~3개, 편입 이유 기록",null,
+"투자 메모 2 완성, 모의 포트폴리오 첫 점검"]},
+{p:"기술적 분석과 스윙",s:"2027-01-18",t:"기술적 분석 ①",m:"vac",d:[
+"『금융시장의 기술적 분석』 철학과 다우이론 파트",
+"차트 구성 파트, TradingView에서 봉차트와 로그차트 설정",
+"추세의 기본: 지지, 저항, 추세선, 되돌림",
+"실습: SPY 일봉에 추세선과 지지·저항 직접 그리고 캡처",
+"주요 반전 패턴(헤드앤숄더, 이중바닥) 파트",null,
+"과거 차트에서 반전 패턴 3개 찾아 캡처"]},
+{s:"2027-01-25",t:"기술적 분석 ②",m:"vac",d:[
+"지속 패턴(삼각형, 깃발) 파트","거래량 파트: 가격과 거래량의 확인 관계",
+"이동평균 파트: 20·50·200일선과 교차",
+"오실레이터 파트: RSI를 깊게, MACD는 개념만",
+"캔들 파트 훑기, 자금관리 파트 정독",null,
+"내 차트 템플릿 확정(이동평균 2개, 거래량, RSI)"]},
+{s:"2027-02-01",t:"초수익 성장주 투자 ①",m:"vac",n:"설 연휴(2/6~9)는 가볍게 갑니다.",d:[
+"『초수익 성장주 투자』 앞부분: SEPA 전략 개요",
+"주가 4단계와 2단계에서만 사는 이유",
+"트렌드 템플릿 조건 정리",
+"실습: TradingView 스크리너에 트렌드 템플릿과 비슷한 조건 설정",
+"펀더멘털 파트: 실적 가속과 어닝 서프라이즈",
+"설 연휴: 20분 복습","설 연휴: 주간 복기만"]},
+{s:"2027-02-08",t:"초수익 성장주 투자 ②, 규칙 초안",m:"vac",d:[
+"설 연휴: VCP(변동성 수축 패턴) 파트",
+"대체공휴일: VCP 사례 차트 3개 캡처",
+"손절 파트: 손실을 짧게 끊는 이유",
+"포지션 사이징: 1회 위험 1~2% 계산법",
+"완독, 매매 규칙 v0.1(진입 조건, 손절, 익절, 비중) 작성",null,
+"규칙 v0.1을 과거 차트 5개에 적용해 보기"]},
+{s:"2027-02-15",t:"모의매매 시작",m:"vac",d:[
+"TradingView 페이퍼 트레이딩 계좌 만들고 가상 자금 설정",
+"스크리닝으로 후보 5개 선정",
+"첫 모의 진입: 규칙대로 진입, 손절, 목표 설정하고 일지 기록",
+"보유 포지션 점검, 일지 업데이트",
+"모의 장기 포트폴리오 월간 점검",null,
+"주간 매매 복기: 규칙을 어긴 순간 기록"]},
+{p:"암호화폐",s:"2027-02-22",t:"비트코인 ①",m:"vac",d:[
+"비트코인 백서(9쪽) 한국어 번역본 정독",
+"백서 재독, 이중지불과 작업증명 그림으로 정리",
+"『비트코인, 블록체인과 금융의 혁신』 개요와 작동 원리 장",
+"같은 책: 키, 주소, 지갑 장",
+"모의매매 점검, 일지","BTC 반감기 일정과 과거 사이클 가격 흐름 조사",
+"주간 복기, 개강 준비"]},
+{s:"2027-03-01",t:"비트코인 ②",m:"sem",n:"3/1 삼일절은 독서에 씁니다.",d:[
+"삼일절: 같은 책 트랜잭션 장",null,
+"블록체인, 채굴과 합의 장",
+"이동 중: 온체인 지표 입문(MVRV, 거래소 순유입) 글 1편",
+"모의매매 주간 점검, 코인 모의 포지션 1개 추가(BTC)",null,"주간 복기"]},
+{s:"2027-03-08",t:"이더리움, 스테이블코인, ETF",m:"sem",d:[
+"이더리움 백서 요약: 스마트컨트랙트 개념",null,
+"스테이블코인 담보 구조와 디페깅 사례",
+"이동 중: 비트코인 현물 ETF 구조와 자금 유입 데이터 보는 법",
+"모의매매 점검, 코인 차트에 내 차트 템플릿 적용",null,"주간 복기"]},
+{s:"2027-03-15",t:"보안과 제도",m:"sem",d:[
+"거래소 파산·해킹 사례(FTX 등)에서 배울 점",null,
+"지갑 보안: 시드 문구, 콜드월렛, 2단계 인증, 피싱 유형",
+"이동 중: 트래블룰과 해외 거래소 입출금 규제",
+"가상자산 과세 최신 뉴스 확인, 250만 원 공제와 22% 구조 정리",null,
+"코인 원칙 초안(비중 상한, 알트코인 규칙 등)"]},
+{p:"실전 준비",s:"2027-03-22",t:"모의매매 집중",m:"sem",d:[
+"신규 후보 스크리닝",null,"보유 포지션 점검, 손절 준수 확인",
+"이동 중: 지난 매매 일지 다시 읽기",
+"승률, 평균 손익비, 최대 낙폭 계산",null,
+"가장 큰 실수 1개와 규칙 수정안"]},
+{s:"2027-03-29",t:"포트폴리오와 계좌 설계",m:"sem",d:[
+"장기·가치 / 스윙 / 코인 비중 초안과 근거",null,
+"계좌 분리 설계와 계좌별 규칙",
+"이동 중: 해외주식 양도세(연 250만 원 공제 후 22%, 5월 신고) 정리",
+"모의매매 점검, 매월 정액 적립 계획",null,"주간 복기"]},
+{s:"2027-04-05",t:"규칙서 v1.0",m:"sem",d:[
+"규칙서 1부: 장기·가치투자 매수·매도 조건",null,
+"규칙서 2부: 스윙 진입, 손절, 익절, 1회 위험 한도",
+"이동 중: 초안 다시 읽고 모호한 문장 표시",
+"규칙서 3부: 코인 원칙과 멘탈 규칙(연속 손실 시 휴식 등)",null,
+"규칙서 v1.0 확정, 모의매매 기록과 어긋나는 부분 점검"]},
+{s:"2027-04-12",t:"계좌와 첫 달 계획",m:"sem",d:[
+"증권사 비교: 해외주식 수수료, 환전 우대, 앱",null,
+"국내 거래소 가입 절차와 준비물 확인(만 19세 생일 당일부터 가입 가능)",
+"이동 중: 환율이 원화 수익률에 미치는 영향",
+"모의매매 마지막 점검, 전체 성과 정리",null,
+"실전 첫 달 계획: 소액 투입 금액, 첫 ETF와 종목 후보"]},
+{s:"2027-04-19",t:"중간고사 주간",m:"exam",n:"예상 일정입니다.",d:[
+EX,null,EX,EX,"휴식",null,"D-10: 규칙서 최종 읽기"]},
+{s:"2027-04-26",t:"D-day",m:"sem",d:[
+"첫 달 매수 계획 최종 점검",null,
+"앱 설치, 인증 수단, 필요 서류 준비 완료",
+"4월 29일: 증권 계좌와 거래소 가입, 규칙서대로 소액 첫 매수(장기 ETF부터)"]}
+];
+const END="2027-04-29", KEY="invplan-v1";
+const DOW=["월","화","수","목","금","토","일"];
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parse=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+let done={};try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){done={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}};
+const days=[];
+W.forEach((w,wi)=>{const st=parse(w.s);const mins=w.m==="vac"?VAC:w.m==="exam"?EXAM:SEM;
+  w.d.forEach((t,i)=>{const d=new Date(st);d.setDate(st.getDate()+i);const k=iso(d);if(k>END)return;
+    let txt=t; if(txt==null) txt=(i===1?TUE:SAT);
+    let m=mins[i]; if(w.m==="hol") m=(i>=3&&i<=5)?60:SEM[i];
+    days.push({k,d,txt,m,wi,dow:i});});});
+const todayK=iso(new Date());
+const todayIdx=(()=>{const i=days.findIndex(x=>x.k===todayK);if(i>=0)return i;return todayK<days[0].k?0:days.length-1})();
+
+function renderHead(){
+  const diff=Math.round((parse(END)-parse(todayK))/864e5);
+  document.getElementById("dd").textContent=diff>0?`D-${diff}`:diff===0?"D-DAY":"완료";
+  const n=days.filter(x=>done[x.k]).length;
+  document.getElementById("ddsub").textContent=`${days.length}일 중 ${n}일 완료`;
+  const tape=document.getElementById("tape");tape.innerHTML="";
+  days.forEach((x,i)=>{const b=document.createElement("button");
+    b.className=(done[x.k]?"ok":x.k<todayK?"past":"")+(i===todayIdx&&x.k===todayK?" now":"");
+    b.setAttribute("aria-label",`${x.d.getMonth()+1}월 ${x.d.getDate()}일 ${done[x.k]?"완료":""}`);
+    b.onclick=()=>jump(x);tape.appendChild(b);});
+}
+function renderToday(){
+  const x=days[todayIdx];const el=document.getElementById("today");
+  const lbl=x.k===todayK?"오늘":x.k>todayK?"첫날":"마지막 날";
+  el.innerHTML=`<h2>${lbl}, ${x.d.getMonth()+1}월 ${x.d.getDate()}일 ${DOW[x.dow]}요일, ${x.m}분</h2>
+  <div class="task"></div><button class="btn ${done[x.k]?"on":""}" id="tbtn">${done[x.k]?"완료함":"완료로 표시"}</button>`;
+  el.querySelector(".task").textContent=x.txt;
+  document.getElementById("tbtn").onclick=()=>toggle(x.k);
+}
+function renderWeeks(){
+  const box=document.getElementById("weeks");box.innerHTML="";
+  W.forEach((w,wi)=>{
+    if(w.p){const h=document.createElement("div");h.className="phase";h.textContent=w.p;box.appendChild(h);}
+    const ds=days.filter(x=>x.wi===wi);const f=ds[0].d,l=ds[ds.length-1].d;
+    const n=ds.filter(x=>done[x.k]).length;
+    const det=document.createElement("details");det.id="w"+wi;
+    if(ds.some(x=>x.k===days[todayIdx].k))det.open=true;
+    const tag=w.m==="exam"?'<span class="tag exam">시험</span>':w.m==="vac"?'<span class="tag vac">방학</span>':w.m==="hol"?'<span class="tag hol">연휴</span>':"";
+    det.innerHTML=`<summary><span class="wk">${wi+1}주</span><span><span class="wt"></span>${tag}<br><span class="wd">${f.getMonth()+1}/${f.getDate()} ~ ${l.getMonth()+1}/${l.getDate()}</span></span><span class="pct">${n}/${ds.length}</span></summary>`;
+    det.querySelector(".wt").textContent=w.t;
+    if(w.n){const p=document.createElement("p");p.className="note";p.textContent=w.n;det.appendChild(p);}
+    const ul=document.createElement("ul");ul.className="days";
+    ds.forEach(x=>{const li=document.createElement("li");li.id="d"+x.k;
+      if(x.k===todayK)li.className="is-today";if(done[x.k])li.classList.add("is-done");
+      const id="c"+x.k;
+      li.innerHTML=`<input type="checkbox" id="${id}" ${done[x.k]?"checked":""}><label class="dl" for="${id}">${x.d.getMonth()+1}/${x.d.getDate()} ${DOW[x.dow]}<small>${x.m}분</small></label><span class="t"></span>`;
+      li.querySelector(".t").textContent=x.txt;
+      li.querySelector("input").onchange=()=>toggle(x.k);
+      ul.appendChild(li);});
+    det.appendChild(ul);box.appendChild(det);});
+}
+function toggle(k){if(done[k])delete done[k];else done[k]=true;save();renderAll();}
+function jump(x){const det=document.getElementById("w"+x.wi);det.open=true;
+  const li=document.getElementById("d"+x.k);li.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});}
+function renderAll(){const open=[...document.querySelectorAll("details[open]")].map(d=>d.id);
+  renderHead();renderToday();renderWeeks();
+  if(open.length)document.querySelectorAll("details").forEach(d=>d.open=open.includes(d.id));}
+document.getElementById("exp").onclick=()=>{const t=days.filter(x=>done[x.k]).map(x=>`${x.k} ${x.txt}`).join("\n")||"완료한 날이 아직 없습니다.";
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>alert("완료 기록을 클립보드에 복사했습니다."),()=>alert(t));else alert(t);};
+document.getElementById("rst").onclick=()=>{if(confirm("완료 기록을 모두 지울까요?")){done={};save();renderAll();}};
+renderHead();renderToday();renderWeeks();
+</script>
+</body>
+</html>
