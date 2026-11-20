@@ -3,384 +3,301 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>D-Day 4.29 투자 공부 플랜</title>
+<title>D-Day 4.29 투자 준비</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#EDF1F6; --paper:#F8FAFC; --ink:#18263A; --muted:#5A6A7E; --line:#C8D2DE;
-  --amber:#D99A00; --amber-soft:#FBEFC8; --done:#2E7A58; --done-soft:#D9EFE4; --exam:#8A5CC2;
+  --accent:#B07D00; --done:#2E7A58;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#101823; --paper:#172231; --ink:#E4EAF1; --muted:#95A4B6; --line:#2B3A4D;
-    --amber:#F0B429; --amber-soft:#3A3016; --done:#5CC495; --done-soft:#17392B; --exam:#B592E6;
+    --accent:#F0B429; --done:#5CC495;
   }
 }
 :root[data-theme="dark"]{
   --bg:#101823; --paper:#172231; --ink:#E4EAF1; --muted:#95A4B6; --line:#2B3A4D;
-  --amber:#F0B429; --amber-soft:#3A3016; --done:#5CC495; --done-soft:#17392B; --exam:#B592E6;
+  --accent:#F0B429; --done:#5CC495;
 }
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
-.wrap{max-width:760px;margin:0 auto;padding:28px 18px 64px}
-header h1{font-size:15px;font-weight:500;color:var(--muted);margin:0 0 4px}
-.count{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.count b{font-size:64px;line-height:1;font-weight:700;letter-spacing:-2px}
-.count span{color:var(--muted)}
-.tape{display:grid;grid-template-columns:repeat(auto-fill,minmax(7px,1fr));gap:2px;margin:22px 0 8px}
-.tape button{all:unset;cursor:pointer;height:22px;border-radius:1px;background:var(--line)}
-.tape button.past{background:color-mix(in srgb,var(--line) 55%,var(--muted))}
-.tape button.ok{background:var(--done)}
-.tape button.now{background:var(--amber);outline:2px solid var(--amber);outline-offset:1px}
-.tape button:focus-visible{outline:2px solid var(--ink)}
-.legend{font-size:13px;color:var(--muted)}
-.today{margin:28px 0;background:var(--paper);border-left:4px solid var(--amber);padding:18px 18px 16px;border-radius:0 6px 6px 0}
-.today h2{margin:0 0 2px;font-size:14px;font-weight:500;color:var(--muted)}
-.today .task{font-size:19px;font-weight:500;margin:6px 0 12px}
-.btn{font:inherit;font-size:15px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:8px 14px;border-radius:4px;cursor:pointer}
-.btn.on{background:var(--done);border-color:var(--done);color:#fff}
-.btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-h3.sec{font-size:20px;margin:40px 0 6px}
-p.sub{margin:0 0 14px;color:var(--muted);font-size:14px}
-.phase{font-size:13px;font-weight:700;color:var(--muted);margin:26px 0 6px}
-details{border-top:1px solid var(--line)}
-details:last-of-type{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;padding:12px 2px;display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary:focus-visible{outline:2px solid var(--amber)}
-.wk{font-weight:700;font-variant-numeric:tabular-nums}
-.wt{font-weight:500}
-.wd{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tag{font-size:12px;padding:1px 6px;border-radius:3px;margin-left:6px;white-space:nowrap}
-.tag.exam{color:var(--exam);border:1px solid var(--exam)}
-.tag.vac{color:var(--done);border:1px solid var(--done)}
-.tag.hol{color:var(--amber);border:1px solid var(--amber)}
-.pct{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.note{font-size:14px;color:var(--muted);margin:0 0 8px 54px}
-ul.days{list-style:none;margin:0 0 14px;padding:0}
-ul.days li{display:grid;grid-template-columns:28px 64px 1fr;gap:8px;padding:8px 2px;align-items:start;border-radius:4px}
-ul.days li.is-today{background:var(--amber-soft)}
-ul.days li.is-done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
-ul.days input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--done)}
-.dl{font-size:13px;line-height:1.35;font-variant-numeric:tabular-nums}
-.dl small{display:block;color:var(--muted)}
-.books{display:grid;gap:14px}
-.book{background:var(--paper);padding:14px 16px;border-radius:6px}
-.book b{display:block}
-.book .by{font-size:13px;color:var(--muted)}
-.book p{margin:6px 0 0;font-size:14px}
-.rules li{margin:0 0 8px}
-.foot{font-size:13px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:14px}
-.foot a{color:var(--muted)}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-@media (prefers-reduced-motion:no-preference){ul.days li{transition:background .2s}}
+.wrap{max-width:620px;margin:0 auto;padding:36px 18px 64px}
+.top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.top b{font-size:56px;line-height:1;font-weight:700;letter-spacing:-2px;font-variant-numeric:tabular-nums}
+.top span{color:var(--muted);font-size:15px}
+.kicker{font-size:14px;color:var(--muted);margin:14px 0 24px}
+.card{background:var(--paper);border-left:4px solid var(--accent);padding:26px 24px;border-radius:0 8px 8px 0}
+.card .n{font-size:13px;color:var(--muted);margin:0 0 10px;font-variant-numeric:tabular-nums}
+.card .task{font-size:21px;font-weight:500;margin:0}
+.card .lbl{display:block;margin:20px 0 6px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.card .q{margin:0;font-size:17px;font-weight:500;line-height:1.5}
+.card .where{display:inline-block;font-size:12px;font-weight:500;color:var(--accent);
+  border:1px solid var(--accent);border-radius:3px;padding:1px 7px}
+.card .cmd{display:block;margin:10px 0 0;background:var(--bg);border:1px solid var(--line);
+  border-radius:5px;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.card .why{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.card .mech{margin:0;font-size:15px;line-height:1.75}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 0}
+.btn{font:inherit;font-size:15px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+  padding:10px 18px;border-radius:5px;cursor:pointer}
+.btn.go{background:var(--done);border-color:var(--done);color:#fff;font-weight:500}
+.btn.ghost{border-color:var(--line);color:var(--muted)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tally{margin:36px 0 0;border-top:1px solid var(--line);padding-top:18px}
+.tally b{font-size:32px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.tally span{color:var(--muted);font-size:14px}
+details{margin:12px 0 0}
+summary{cursor:pointer;font-size:14px;color:var(--muted)}
+summary:focus-visible{outline:2px solid var(--accent)}
+ol.log{margin:12px 0 0;padding-left:22px;font-size:14px;color:var(--muted)}
+ol.log li{margin:0 0 6px}
+.foot{font-size:13px;color:var(--muted);margin:40px 0 0;border-top:1px solid var(--line);padding-top:14px}
+.empty{font-size:19px;font-weight:500}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <h1>2026년 9월 21일 시작, 2027년 4월 29일 실전 투자 시작</h1>
-  <div class="count"><b id="dd">D-0</b><span id="ddsub"></span></div>
-  <div class="tape" id="tape" aria-label="날짜별 진행 표시"></div>
-  <div class="legend">칸 하나가 하루입니다. 초록은 완료, 노랑은 오늘. 칸을 누르면 그날로 이동합니다.</div>
-</header>
 
-<section class="today" id="today" aria-live="polite"></section>
+<div class="top"><b id="dd">D-0</b><span id="sub"></span></div>
+<p class="kicker">2027년 4월 29일, 계좌를 열고 규칙대로 첫 매수를 하는 날. 그날 필요한 것만 거꾸로 골랐어요.<br>
+<b>질문에 먼저 답을 정하고</b>, 확인은 그다음에. 못 하는 날은 그냥 닫으면 돼요 — 아무것도 기록되지 않아요.</p>
 
-<h3 class="sec">주차별 하루 목표</h3>
-<p class="sub">학기 중: 월·수 45분, 화 15분(멘토링 날), 목 40분(이동 시간), 금 90분(PT 후 오후), 토 15분, 일 60분(오후 5시 조교 전). 방학 중: 평일 90분, 토 20분, 일 60분. 시험 주간 날짜는 예상치이니 실제 학사일정에 맞춰 옮기세요.</p>
-<div id="weeks"></div>
+<section class="card" id="card" aria-live="polite"></section>
 
-<h3 class="sec">교재</h3>
-<p class="sub">읽는 순서대로입니다. 모두 국내 번역·출간본이 있고, 마지막 두 항목은 무료 자료입니다.</p>
-<div class="books">
-  <div class="book"><b>돈의 심리학</b><span class="by">모건 하우절, 인플루엔셜</span><p>1~2주차. 투자 기술보다 먼저 태도를 잡는 책. 짧은 장 20개라 입문용으로 부담이 없습니다.</p></div>
-  <div class="book"><b>재무제표 모르면 주식투자 절대로 하지 마라</b><span class="by">사경인, 베가북스</span><p>3~6주차. 손익계산서, 재무상태표, 현금흐름표를 투자자 관점에서 읽는 법. 이후 모든 분석의 바탕입니다.</p></div>
-  <div class="book"><b>현명한 투자자</b><span class="by">벤저민 그레이엄, 국일증권경제연구소</span><p>7~10주차. 가치투자의 원전. 8장(미스터 마켓)과 20장(안전마진)은 정독, 나머지는 해설 위주로 속도를 냅니다.</p></div>
-  <div class="book"><b>전설로 떠나는 월가의 영웅</b><span class="by">피터 린치, 국일증권경제연구소</span><p>11~14주차. 기업 6가지 유형 분류와 '2분 스토리'. 개별 종목 발굴의 실전 교과서입니다.</p></div>
-  <div class="book"><b>투자에 대한 생각</b><span class="by">하워드 막스, 비즈니스맵</span><p>15~16주차. 리스크와 시장 사이클. 장기투자에서 버티는 힘을 줍니다.</p></div>
-  <div class="book"><b>금융시장의 기술적 분석</b><span class="by">존 J. 머피, 국일증권경제연구소</span><p>18~19주차. 기술적 분석의 표준 교재. 전부 읽지 않고 추세, 패턴, 거래량, 이동평균, 오실레이터, 자금관리 파트만 봅니다.</p></div>
-  <div class="book"><b>초수익 성장주 투자</b><span class="by">마크 미너비니, 이레미디어</span><p>20~21주차. 스윙의 뼈대. 주가 4단계, 트렌드 템플릿, VCP, 손절과 포지션 사이징.</p></div>
-  <div class="book"><b>비트코인, 블록체인과 금융의 혁신</b><span class="by">안드레아스 안토노풀로스 (Mastering Bitcoin 번역서)</span><p>23~24주차. 비트코인이 실제로 어떻게 작동하는지. 개발 코드 부분은 건너뛰어도 됩니다.</p></div>
-  <div class="book"><b>무료 자료</b><span class="by">비트코인 백서, SEC EDGAR 10-K, 버크셔 해서웨이 주주서한, 다모다란 NYU 밸류에이션 강의(유튜브), TradingView 페이퍼 트레이딩</span><p>책과 병행합니다. 10-K와 주주서한은 AI에게 요약을 시키되, 핵심 장은 직접 읽고 요약을 대조하세요.</p></div>
+<div class="tally">
+  <b id="n">0</b> <span>개 해냈어요</span>
+  <details>
+    <summary>해낸 것 보기</summary>
+    <ol class="log" id="log"></ol>
+  </details>
 </div>
 
-<h3 class="sec">4월 29일 전에 확정할 것</h3>
-<ol class="rules">
-  <li>장기·가치 / 스윙 / 코인 비중과 계좌 분리 방식</li>
-  <li>스윙 1회 최대 손실 한도(전체 자금의 1~2% 이내)와 손절 규칙</li>
-  <li>처음 3개월은 소액으로만, 모의투자 성과와 비교한 뒤 증액</li>
-  <li>세금: 해외주식 양도차익 연 250만 원 공제 후 22%(다음 해 5월 신고), 가상자산 과세 시행 여부 최종 확인</li>
-</ol>
-
-<div class="tools">
-  <button class="btn" id="exp">완료 기록 내보내기</button>
-  <button class="btn" id="rst">완료 기록 초기화</button>
-</div>
-
-<p class="foot">체크 기록은 이 기기의 브라우저에만 저장됩니다. 이 플랜은 공부 계획이며 특정 종목의 매수·매도 권유가 아닙니다.<br>
-참고: <a href="https://support.upbit.com/hc/ko/articles/900005872026" target="_blank" rel="noopener">업비트 미성년자 가입 안내</a>, <a href="https://www.bloter.net/news/articleView.html?idxno=669414" target="_blank" rel="noopener">가상자산 과세 2027년 시행 관련 기사</a></p>
+<p class="foot">하루 단위 칸은 없어요. 쉰 날은 기록되지 않고, 쌓이는 건 해낸 것뿐이에요.<br>
+이 페이지는 공부용이며 특정 종목·자산의 매수·매도 권유가 아니에요. 세금과 가입 조건은 2026년 11월 기준이고 바뀔 수 있으니, 실제로 움직이기 전에 공식 안내를 확인하세요.</p>
 </div>
 
 <script>
-const SEM=[45,15,45,40,90,15,60], VAC=[90,90,90,90,90,20,60], EXAM=[10,10,10,10,15,10,10];
-const TUE="시장 체크: S&P500, 나스닥, BTC 주간 등락과 뉴스 헤드라인 3개 기록";
-const SAT="주말 시장 체크: BTC, ETH 가격과 이번 주 이슈 한 줄";
-const EX="시험 주간: 용어 카드 10분 복습만";
-const W=[
-{p:"준비와 태도",s:"2026-09-21",t:"세팅, 돈의 심리학",m:"hol",n:"추석 연휴(9/24~26)에 독서를 몰아서 합니다.",d:[
-"노션이나 스프레드시트에 투자 노트와 매매일지 표(날짜, 종목, 진입 이유, 손절, 목표, 결과) 만들기",null,
-"TradingView 가입, 관심 목록 만들기(SPY, QQQ, BTCUSD, ETHUSD와 아는 기업 5개)",
-"추석: 『돈의 심리학』 1~4장","추석: 『돈의 심리학』 5~8장, 복리 개념 한 줄 정리","추석: 『돈의 심리학』 9~12장",
-"『돈의 심리학』 13~16장, 주간 복기 양식 첫 작성"]},
-{s:"2026-09-28",t:"돈의 심리학 완독, 시장 기초",m:"sem",d:[
-"『돈의 심리학』 17~20장 완독, 가장 와닿은 문장 3개와 이유",null,
-"주식, 채권, ETF, 인덱스 차이를 내 말로 한 페이지 정리",
-"이동 중: S&P500 구성 방식(시가총액 가중)과 편입 기준 학습",
-"실습: SPY, VOO, QQQ의 보수와 상위 10개 종목 비교표 만들기",null,
-"주간 복기, '나는 왜 투자하는가' 원칙 문서 작성"]},
-{p:"재무제표",s:"2026-10-05",t:"재무제표 ① 손익계산서",m:"sem",n:"10/9 한글날 금요일은 실습에 씁니다.",d:[
-"『재무제표 모르면 주식투자 절대로 하지 마라』 전체의 1/8",null,
-"다음 1/8, 매출에서 순이익까지 흐름도 그리기",
-"이동 중: 읽은 부분 복습, 모르는 용어 5개 정리",
-"실습: 애플 최근 3년 손익계산서를 표로 옮기고 매출총이익률, 영업이익률 계산",null,
-"주간 복기, 계산 결과를 AI에게 검산 요청해 틀린 곳 확인"]},
-{s:"2026-10-12",t:"재무제표 ② 재무상태표",m:"sem",d:[
-"같은 책 3/8 지점까지",null,
-"4/8 지점까지, 자산=부채+자본 구조와 유동비율, 부채비율 정리",
-"이동 중: ROE, ROA와 듀폰 분해 개념",
-"실습: 애플과 마이크로소프트 재무상태표 비교, 부채비율과 ROE 계산",null,
-"주간 복기"]},
-{s:"2026-10-19",t:"중간고사 주간",m:"exam",n:"예상 일정입니다. 실제 시험 주로 옮기세요.",d:[
-EX,null,EX,"이동 중: 현금흐름표 개념 영상 1개(영업, 투자, 재무 현금흐름)","휴식 또는 15분 시장 체크",null,"5분 주간 복기"]},
-{s:"2026-10-26",t:"재무제표 ③ 현금흐름, 완독",m:"sem",d:[
-"같은 책 6/8 지점까지",null,
-"완독, 잉여현금흐름(FCF = 영업현금흐름 − 설비투자) 정리",
-"이동 중: SEC EDGAR 사용법, 10-K 목차(Item 1, 1A, 7, 8) 파악",
-"실습: 애플 10-K에서 재무제표 3종을 직접 찾아 FCF 5년치 계산",null,
-"재무제표 한 장 요약 노트 완성"]},
-{p:"가치투자",s:"2026-11-02",t:"현명한 투자자 ①",m:"sem",d:[
-"『현명한 투자자』 서문, 1장(투자와 투기)",null,
-"2~3장(인플레이션, 100년 시장 역사)",
-"이동 중: 1~3장 해설(츠바이크 논평)",
-"4~5장(방어적 투자자의 포트폴리오), 방어적 투자자 기준 메모",null,
-"주간 복기, '나는 방어적인가 공격적인가' 한 문단"]},
-{s:"2026-11-09",t:"현명한 투자자 ②",m:"sem",d:[
-"6~7장(공격적 투자자가 피할 것과 할 것)",null,
-"8장(투자자와 시장 변동, 미스터 마켓) 정독",
-"이동 중: 버크셔 해서웨이 최근 주주서한 앞부분",
-"9~10장 훑기, 미스터 마켓 비유를 내 사례로 다시 쓰기",null,"주간 복기"]},
-{s:"2026-11-16",t:"현명한 투자자 ③",m:"sem",d:[
-"11~12장(증권 분석 기초, 주당순이익)",null,
-"13~14장(기업 비교, 방어적 투자자의 종목 선정)",
-"이동 중: 주주서한 이어 읽기",
-"실습: 14장 기준을 관심 기업 3곳에 적용한 체크리스트 표",null,"주간 복기"]},
-{s:"2026-11-23",t:"현명한 투자자 ④",m:"sem",d:[
-"15장(공격적 투자자의 종목 선정)",null,
-"16~19장 훑기, 20장(안전마진) 정독",
-"이동 중: 안전마진을 다른 자료로 한 번 더",
-"실습: 관심 기업 1곳을 PER, PBR, 배당수익률로 비싼지 싼지 판단",null,
-"『현명한 투자자』 핵심 10줄 요약"]},
-{s:"2026-11-30",t:"월가의 영웅 ①",m:"sem",d:[
-"『전설로 떠나는 월가의 영웅』 프롤로그, 1부 앞부분",null,
-"1부 완독(아마추어의 이점, 투자 전 점검)",
-"이동 중: 내가 쓰는 제품과 서비스 중 미국 상장사 10개 찾기",
-"2부: 기업 6가지 유형(저성장, 대형우량, 고성장, 경기순환, 회생, 자산주) 정리",null,
-"10개 기업을 6가지 유형으로 분류"]},
-{s:"2026-12-07",t:"월가의 영웅 ②",m:"sem",d:[
-"2부 이어서: 완벽한 종목의 조건, 피해야 할 종목",null,
-"2부 완독: 2분 스토리, 재무 점검 항목",
-"이동 중: 기말 대비로 10분 복습만",
-"실습: 관심 기업 1곳의 2분 스토리(무엇을 파는지, 왜 성장하는지, 리스크)",null,"주간 복기"]},
-{s:"2026-12-14",t:"기말고사 주간",m:"exam",n:"예상 일정입니다.",d:[
-EX,null,EX,EX,"휴식 또는 15분 시장 체크",null,"학기 복기: 배운 것 1페이지 정리, 방학 목표 확인"]},
-{p:"겨울방학: 기업분석과 밸류에이션",s:"2026-12-21",t:"월가의 영웅 완독, 기업분석 1",m:"vac",d:[
-"『전설로 떠나는 월가의 영웅』 3부 완독",
-"기업분석 1: 대형 우량주 1곳 선정, 10-K Item 1(사업) 읽고 5줄 요약",
-"Item 1A(리스크 요인) 읽고 핵심 리스크 5개",
-"Item 7(경영진 분석) 읽기",
-"5년 재무표: 매출, 영업이익, 순이익, FCF, 부채","주간 시장 체크",
-"투자 메모 v1(1페이지): 사업, 해자, 숫자, 리스크, 적정가 감각"]},
-{s:"2026-12-28",t:"투자에 대한 생각 ①",m:"vac",n:"1/1 신정은 쉬어도 됩니다.",d:[
-"『투자에 대한 생각』 1~5장(2차적 사고, 효율시장, 가치와 가격, 리스크)",
-"6~8장(리스크 인식과 통제)",
-"9~10장(사이클, 진자), 사이클 도식 그리기",
-"다모다란 NYU 밸류에이션 강의 1강",
-"신정: 휴식 또는 연간 목표 점검",null,
-"2차적 사고 예시 3개 만들기"]},
-{s:"2027-01-04",t:"투자에 대한 생각 ②, 밸류에이션",m:"vac",d:[
-"11~15장(역발상, 헐값 찾기, 인내)","16~20장 완독",
-"다모다란 강의 2강: 할인율과 현금흐름 할인",
-"상대가치(PER)와 절대가치(DCF) 차이 정리",
-"실습: 기업분석 1 기업으로 간단 DCF(비관, 기본, 낙관 3개 시나리오)",null,
-"역DCF: 현재 주가가 가정하는 성장률 계산, 메모 v2"]},
-{s:"2027-01-11",t:"장기 포트폴리오 설계, 기업분석 2",m:"vac",d:[
-"ETF 심화: 분배금, 환헤지, 추적오차, 미국 상장과 국내 상장 해외 ETF의 세금 차이",
-"자산배분 기초: 주식, 채권, 현금 비중과 리밸런싱 규칙",
-"기업분석 2: 고성장주 1곳, 10-K Item 1과 1A",
-"기업분석 2: 5년 재무표",
-"모의 장기 포트폴리오 구성(가상 금액): ETF 중심 + 개별주 2~3개, 편입 이유 기록",null,
-"투자 메모 2 완성, 모의 포트폴리오 첫 점검"]},
-{p:"기술적 분석과 스윙",s:"2027-01-18",t:"기술적 분석 ①",m:"vac",d:[
-"『금융시장의 기술적 분석』 철학과 다우이론 파트",
-"차트 구성 파트, TradingView에서 봉차트와 로그차트 설정",
-"추세의 기본: 지지, 저항, 추세선, 되돌림",
-"실습: SPY 일봉에 추세선과 지지·저항 직접 그리고 캡처",
-"주요 반전 패턴(헤드앤숄더, 이중바닥) 파트",null,
-"과거 차트에서 반전 패턴 3개 찾아 캡처"]},
-{s:"2027-01-25",t:"기술적 분석 ②",m:"vac",d:[
-"지속 패턴(삼각형, 깃발) 파트","거래량 파트: 가격과 거래량의 확인 관계",
-"이동평균 파트: 20·50·200일선과 교차",
-"오실레이터 파트: RSI를 깊게, MACD는 개념만",
-"캔들 파트 훑기, 자금관리 파트 정독",null,
-"내 차트 템플릿 확정(이동평균 2개, 거래량, RSI)"]},
-{s:"2027-02-01",t:"초수익 성장주 투자 ①",m:"vac",n:"설 연휴(2/6~9)는 가볍게 갑니다.",d:[
-"『초수익 성장주 투자』 앞부분: SEPA 전략 개요",
-"주가 4단계와 2단계에서만 사는 이유",
-"트렌드 템플릿 조건 정리",
-"실습: TradingView 스크리너에 트렌드 템플릿과 비슷한 조건 설정",
-"펀더멘털 파트: 실적 가속과 어닝 서프라이즈",
-"설 연휴: 20분 복습","설 연휴: 주간 복기만"]},
-{s:"2027-02-08",t:"초수익 성장주 투자 ②, 규칙 초안",m:"vac",d:[
-"설 연휴: VCP(변동성 수축 패턴) 파트",
-"대체공휴일: VCP 사례 차트 3개 캡처",
-"손절 파트: 손실을 짧게 끊는 이유",
-"포지션 사이징: 1회 위험 1~2% 계산법",
-"완독, 매매 규칙 v0.1(진입 조건, 손절, 익절, 비중) 작성",null,
-"규칙 v0.1을 과거 차트 5개에 적용해 보기"]},
-{s:"2027-02-15",t:"모의매매 시작",m:"vac",d:[
-"TradingView 페이퍼 트레이딩 계좌 만들고 가상 자금 설정",
-"스크리닝으로 후보 5개 선정",
-"첫 모의 진입: 규칙대로 진입, 손절, 목표 설정하고 일지 기록",
-"보유 포지션 점검, 일지 업데이트",
-"모의 장기 포트폴리오 월간 점검",null,
-"주간 매매 복기: 규칙을 어긴 순간 기록"]},
-{p:"암호화폐",s:"2027-02-22",t:"비트코인 ①",m:"vac",d:[
-"비트코인 백서(9쪽) 한국어 번역본 정독",
-"백서 재독, 이중지불과 작업증명 그림으로 정리",
-"『비트코인, 블록체인과 금융의 혁신』 개요와 작동 원리 장",
-"같은 책: 키, 주소, 지갑 장",
-"모의매매 점검, 일지","BTC 반감기 일정과 과거 사이클 가격 흐름 조사",
-"주간 복기, 개강 준비"]},
-{s:"2027-03-01",t:"비트코인 ②",m:"sem",n:"3/1 삼일절은 독서에 씁니다.",d:[
-"삼일절: 같은 책 트랜잭션 장",null,
-"블록체인, 채굴과 합의 장",
-"이동 중: 온체인 지표 입문(MVRV, 거래소 순유입) 글 1편",
-"모의매매 주간 점검, 코인 모의 포지션 1개 추가(BTC)",null,"주간 복기"]},
-{s:"2027-03-08",t:"이더리움, 스테이블코인, ETF",m:"sem",d:[
-"이더리움 백서 요약: 스마트컨트랙트 개념",null,
-"스테이블코인 담보 구조와 디페깅 사례",
-"이동 중: 비트코인 현물 ETF 구조와 자금 유입 데이터 보는 법",
-"모의매매 점검, 코인 차트에 내 차트 템플릿 적용",null,"주간 복기"]},
-{s:"2027-03-15",t:"보안과 제도",m:"sem",d:[
-"거래소 파산·해킹 사례(FTX 등)에서 배울 점",null,
-"지갑 보안: 시드 문구, 콜드월렛, 2단계 인증, 피싱 유형",
-"이동 중: 트래블룰과 해외 거래소 입출금 규제",
-"가상자산 과세 최신 뉴스 확인, 250만 원 공제와 22% 구조 정리",null,
-"코인 원칙 초안(비중 상한, 알트코인 규칙 등)"]},
-{p:"실전 준비",s:"2027-03-22",t:"모의매매 집중",m:"sem",d:[
-"신규 후보 스크리닝",null,"보유 포지션 점검, 손절 준수 확인",
-"이동 중: 지난 매매 일지 다시 읽기",
-"승률, 평균 손익비, 최대 낙폭 계산",null,
-"가장 큰 실수 1개와 규칙 수정안"]},
-{s:"2027-03-29",t:"포트폴리오와 계좌 설계",m:"sem",d:[
-"장기·가치 / 스윙 / 코인 비중 초안과 근거",null,
-"계좌 분리 설계와 계좌별 규칙",
-"이동 중: 해외주식 양도세(연 250만 원 공제 후 22%, 5월 신고) 정리",
-"모의매매 점검, 매월 정액 적립 계획",null,"주간 복기"]},
-{s:"2027-04-05",t:"규칙서 v1.0",m:"sem",d:[
-"규칙서 1부: 장기·가치투자 매수·매도 조건",null,
-"규칙서 2부: 스윙 진입, 손절, 익절, 1회 위험 한도",
-"이동 중: 초안 다시 읽고 모호한 문장 표시",
-"규칙서 3부: 코인 원칙과 멘탈 규칙(연속 손실 시 휴식 등)",null,
-"규칙서 v1.0 확정, 모의매매 기록과 어긋나는 부분 점검"]},
-{s:"2027-04-12",t:"계좌와 첫 달 계획",m:"sem",d:[
-"증권사 비교: 해외주식 수수료, 환전 우대, 앱",null,
-"국내 거래소 가입 절차와 준비물 확인(만 19세 생일 당일부터 가입 가능)",
-"이동 중: 환율이 원화 수익률에 미치는 영향",
-"모의매매 마지막 점검, 전체 성과 정리",null,
-"실전 첫 달 계획: 소액 투입 금액, 첫 ETF와 종목 후보"]},
-{s:"2027-04-19",t:"중간고사 주간",m:"exam",n:"예상 일정입니다.",d:[
-EX,null,EX,EX,"휴식",null,"D-10: 규칙서 최종 읽기"]},
-{s:"2027-04-26",t:"D-day",m:"sem",d:[
-"첫 달 매수 계획 최종 점검",null,
-"앱 설치, 인증 수단, 필요 서류 준비 완료",
-"4월 29일: 증권 계좌와 거래소 가입, 규칙서대로 소액 첫 매수(장기 ETF부터)"]}
+// 카드 하나 = 질문(q) → 직접 확인(c, s=어디서) → 원리(m). 4월 29일에 필요한 것에서 거꾸로 고른 순서.
+// 계산 결과로 적은 숫자는 전부 실제로 계산해 확인한 값이에요.
+const C=[
+ {p:"출발점",t:"복리 감 잡기",q:"100만 원을 연 7%로 10년 두면 얼마쯤 될까요? 150만, 200만, 300만 중에 골라 보세요.",
+  c:"=1000000*1.07^10",s:"스프레드시트 (구글 시트 또는 엑셀)",
+  w:"아무 칸에 그대로 입력하세요. 수식은 = 로 시작하고, ^ 는 거듭제곱이에요. 약 196만 7천 원이 나와요.",
+  m:"이자에 다시 이자가 붙어서 매년 '불어나는 폭' 자체가 커져요. 72를 수익률로 나누면 두 배가 되는 데 걸리는 햇수가 대충 나와요(72의 법칙) — 72÷7 ≈ 10년. 그래서 복리에서 가장 큰 변수는 수익률보다 시간이에요."},
+ {p:"출발점",t:"일찍 시작한 10년 vs 늦게 시작한 30년",q:"A는 20~29살에 매년 100만 원씩 10번 넣고 멈췄어요. B는 30~59살에 매년 100만 원씩 30번 넣었어요. 둘 다 연 7%. 60살에 누가 더 많을까요?",
+  c:"A열: 나이. A2에 20, 아래로 60까지 채우기\nB열(A의 잔고): B2 =IF(A2<=29,1000000,0)\n              B3 =B2*1.07+IF(A3<=29,1000000,0)  → 60살까지 아래로 복사\nC열(B의 잔고): C2 =0\n              C3 =C2*1.07+IF(AND(A3>=30,A3<=59),1000000,0)  → 아래로 복사",s:"스프레드시트",
+  w:"맨 아랫줄(60살)이 답이에요. A 약 1억 1,254만, B 약 1억 107만. 30살 이후 B열이 넣은 돈 없이도 계속 커지는 걸 한 줄씩 보세요.",
+  m:"A는 1,000만 원, B는 3,000만 원을 넣었는데 A가 더 많아요. A의 돈이 10년 더 일찍 복리를 탔기 때문이에요. 스무 살 전에 공부하는 게 의미 있는 진짜 이유가 이거예요 — 금액이 작아도 시간은 나중에 살 수 없어요."},
+ {p:"출발점",t:"투자금과 생활비 나누기",q:"투자한 돈이 -30%일 때 마침 등록금을 내야 하면 어떻게 될까요?",
+  c:"노트에 1년 안에 쓸 돈(등록금, 생활비, 비상금)을 적고,\n그걸 뺀 금액을 '투자 가능 금액'으로 한 줄 적기",s:"노트",
+  w:"숫자 하나만 나오면 돼요. 그게 4월 29일에 넣을 수 있는 돈의 상한이에요.",
+  m:"쓸 날짜가 정해진 돈을 투자하면, 하락장에 '팔기 싫은데 팔아야 하는' 상황이 생겨요. 평가손실이 확정손실로 바뀌는 순간이에요. 투자 기간보다 먼저 쓸 돈은 투자금이 아니라 예금이에요."},
+ {p:"출발점",t:"손실과 회복의 비대칭",q:"반토막(-50%) 난 주식이 원금으로 돌아오려면 몇 % 올라야 할까요?",
+  c:"=1/(1-50%)-1\n=1/(1-30%)-1\n=1/(1-80%)-1",s:"스프레드시트 (결과 칸을 % 서식으로)",
+  w:"-50%는 +100%, -30%는 +42.9%, -80%는 +400%가 필요해요.",
+  m:"떨어질 때와 오를 때 기준 금액이 달라서 생기는 비대칭이에요. 손실이 커질수록 회복에 필요한 상승률이 급격히 커져요. 그래서 큰 손실을 피하는 게 큰 수익보다 먼저예요. 뒤의 손절·사이징 카드는 전부 이 한 줄에서 나와요."},
+ {p:"출발점",t:"나는 왜 투자하는가, 세 줄",q:"규칙 없이 '느낌'으로 산 주식, 언제 팔아야 할지 알 수 있을까요?",
+  c:"노트에 세 줄:\n왜 (목표)\n얼마 (3번 카드 숫자)\n얼마나 오래",s:"노트",
+  w:"완벽하지 않아도 돼요. 37번 규칙서의 첫 장이 이거예요.",
+  m:"사는 순간의 이유를 적어 두지 않으면 팔 때 판단할 기준이 없어요. 그러면 가격이 결정을 대신해요 — 오르면 욕심, 내리면 공포. 시장이 흔들리기 전에 정해 두는 걸 '사전 약속'이라고 하고, 개인 투자자가 가진 거의 유일한 무기예요."},
+
+ {p:"상품과 비용",t:"ETF 한 주 = 몇 개 회사?",q:"SPY 한 주를 사면 몇 개 회사의 일부를 갖게 될까요? 10개, 100개, 500개?",
+  c:"'SPY holdings' 검색 → 운용사(State Street) 페이지에서 보유 종목 수 확인",s:"브라우저",
+  w:"약 500개예요(주식 종류가 두 개인 회사가 있어 503개 전후).",
+  m:"ETF는 여러 주식을 한 바구니에 담아 주식처럼 사고팔게 만든 상품이에요. SPY는 S&P500 지수를 따라가요. 한 회사가 망해도 바구니 전체에선 일부라서 개별 종목 위험이 크게 줄어요. 대신 '시장 평균'보다 잘할 수는 없어요."},
+ {p:"상품과 비용",t:"500개인데 고르게 담았을까?",q:"S&P500에서 상위 10개 회사의 비중을 합치면 몇 %쯤일까요? 2%? 10%? 30% 이상?",
+  c:"6번 페이지에서 상위 10개 종목 비중(%)을 더하기",s:"브라우저 + 계산기",
+  w:"30%를 훌쩍 넘어요. 값은 매일 바뀌니 직접 더해 보세요.",
+  m:"S&P500은 '시가총액 가중'이라 큰 회사일수록 더 많이 담아요. 그래서 500개여도 실제로는 소수 대형 기술주의 움직임이 지수를 크게 좌우해요. 생각한 것보다 덜 분산돼 있을 수 있다는 뜻이에요."},
+ {p:"상품과 비용",t:"보수 0.5%의 무게",q:"1,000만 원을 30년, 연 7%. 보수 0.03%와 0.5%의 차이는 얼마쯤일까요? 10만? 100만? 1,000만?",
+  c:"=10000000*(1+7%-0.03%)^30\n=10000000*(1+7%-0.5%)^30",s:"스프레드시트",
+  w:"약 7,548만 원 vs 6,614만 원 — 900만 원 넘게 차이 나요.",
+  m:"보수는 수익이 나든 안 나든 매년 자산에서 빠져요. 빠진 돈이 복리로 불어날 기회까지 같이 사라져서, 작은 %가 30년 뒤엔 큰 금액이 돼요. ETF를 고를 때 '총보수(expense ratio)'부터 보는 이유예요."},
+ {p:"상품과 비용",t:"환율도 같이 산다",q:"미국 주식이 달러로 +10%인데, 그동안 원/달러 환율이 10% 내렸어요. 원화로는 몇 %일까요?",
+  c:"=(1+10%)*(1-10%)-1",s:"스프레드시트 (결과 칸을 % 서식으로)",
+  w:"-1%예요. +10%와 -10%가 0이 되지 않아요.",
+  m:"미국 주식을 사면 주식과 달러, 두 가지를 동시에 들고 있는 거예요. 두 수익률이 곱해져서 원화 수익률이 돼요. 반대로 환율이 오르면 주가가 제자리여도 원화로는 수익이 나요. '미국 주식 수익률'을 볼 때는 어느 통화 기준인지 늘 확인하세요."},
+ {p:"상품과 비용",t:"같은 S&P500, 다른 세금",q:"국내 상장 S&P500 ETF와 미국 상장 VOO, 매매 차익에 붙는 세금이 같을까요?",
+  c:"'국내상장 해외ETF 세금', '해외주식 양도소득세'를 검색해서\n국세청이나 증권사 공식 안내로 두 줄 정리",s:"브라우저 + 노트",
+  w:"2026년 기준: 국내 상장 해외 ETF는 차익에 15.4%(배당소득세), 미국 상장은 연 250만 원 공제 후 22%(양도소득세, 다음 해 5월 신고). 바뀔 수 있으니 직접 확인하세요.",
+  m:"같은 지수를 따라가도 어느 나라 시장에 상장됐느냐에 따라 세법상 분류가 달라요. 국내 상장은 팔 때 자동으로 떼고, 미국 상장은 1년치 차익을 합쳐 스스로 신고해요. 소액이면 250만 원 공제가 커서 미국 상장이 유리할 수 있고, 금액과 계좌 종류(ISA 등)에 따라 답이 바뀌어요."},
+ {p:"상품과 비용",t:"사고 바로 팔면 얼마 남나",q:"100만 원어치 미국 주식을 사자마자 팔면, 수수료와 환전 비용으로 얼마나 빠질까요?",
+  c:"쓸 증권사의 해외주식 수수료(%)와 환전 비용을 찾아서\n100만 × (매수 수수료 + 매도 수수료 + 환전 왕복 비용)",s:"브라우저 + 계산기",
+  w:"증권사와 이벤트마다 크게 달라요. 이 숫자가 35번(증권사 고르기)의 기준이 돼요.",
+  m:"매매할 때마다 고정 비용이 빠져요. 오래 들고 있으면 한 번 내고 끝이지만, 스윙처럼 자주 사고팔면 매번 쌓여서 수익을 갉아먹어요. 스윙의 첫 번째 적은 시장이 아니라 비용이에요."},
+
+ {p:"리스크",t:"지수도 반토막 난다",q:"S&P500은 2007~2009년에 고점에서 최대 몇 % 떨어졌을까요? -20%? -35%? -55%?",
+  c:"SPX 월봉 → 2007년 10월 고점에서 2009년 3월 저점까지\n'측정' 도구로 드래그",s:"TradingView",
+  w:"약 -57%예요. 원래 고점을 되찾는 데 5년 넘게 걸렸어요.",
+  m:"고점에서 바닥까지의 최대 하락폭을 MDD(최대 낙폭)라고 해요. '인덱스는 안전하다'는 길게 보면 회복해 왔다는 뜻이지, 중간에 안 떨어진다는 뜻이 아니에요. 4번 카드대로라면 -57%를 메우는 데 +130% 넘게 필요했어요. 장기투자 계획에는 이 구간을 견디는 방법까지 들어가야 해요."},
+ {p:"리스크",t:"집중의 대가: 나스닥 2000",q:"나스닥 지수는 2000년 고점에서 얼마나 떨어졌고, 그 고점을 되찾는 데 몇 년 걸렸을까요?",
+  c:"IXIC(나스닥 종합) 월봉 → 2000년 3월 고점에 가로선을 긋고\n다시 넘는 시점 찾기",s:"TradingView",
+  w:"약 -78%, 고점 회복은 2015년 — 15년이에요.",
+  m:"닷컴 버블 때 기술주는 이익보다 기대로 가격이 매겨졌어요. 기대가 꺼지자 가격이 이익 수준으로 내려왔어요. 좋은 산업도 비싸게 사면 오래 물릴 수 있다는 사례이고, 23번(PER) 카드가 이 이야기를 이어받아요."},
+ {p:"리스크",t:"코인의 변동성",q:"BTC는 2021년 11월 고점에서 2022년 바닥까지 몇 % 떨어졌을까요?",
+  c:"BTCUSD 주봉 → '측정' 도구로 고점에서 저점까지",s:"TradingView",
+  w:"약 -77%예요. 2018년에도 80% 넘게 떨어졌어요.",
+  m:"이 정도 변동성이면 같은 금액이라도 주식보다 훨씬 작게 담아야 전체 계좌가 버텨요. 4번 카드대로 -77%를 메우려면 +330% 넘게 필요해요. 33번의 '코인 비중 상한'이 이 숫자에서 나와요."},
+ {p:"리스크",t:"한 번에 얼마나 살까",q:"전체 1,000만 원, 한 번 매매에서 잃어도 되는 돈은 전체의 1%. 손절을 매수가 -8%에 둔다면, 한 번에 얼마어치 살 수 있을까요?",
+  c:"=10000000*1%/8%",s:"스프레드시트",
+  w:"125만 원이에요. 손절에 걸려도 10만 원(1%)만 잃어요.",
+  m:"'얼마 살까'를 감으로 정하지 않고, '얼마까지 잃을 수 있나'에서 거꾸로 계산하는 방법이에요(포지션 사이징). 손절폭이 넓을수록 적게, 좁을수록 많이 사게 돼요. 이 공식이 연속으로 틀려도 계좌를 살려 둬요 — 17번에서 왜 필요한지 나와요."},
+ {p:"리스크",t:"승률이 낮아도 버는 구조",q:"승률 40%. 이기면 +15%, 지면 -5%. 이 방식으로 계속하면 벌까요 잃을까요?",
+  c:"=40%*15%-60%*5%",s:"스프레드시트 (결과 칸을 % 서식으로)",
+  w:"+3% — 한 번 매매할 때마다 평균 +3%예요.",
+  m:"이걸 기대값이라고 해요. 승률만 보면 지는 게임 같지만, 이길 때 크게·질 때 작게 만들면 남아요. 반대로 승률 70%여도 질 때 크게 잃으면 망해요. 그래서 스윙 규칙의 핵심은 '맞히기'가 아니라, 손절은 짧게 수익은 길게 두는 손익비예요."},
+ {p:"리스크",t:"연패는 정상이다",q:"승률 50%로 10번 매매하면, 그중 5연패 이상이 나올 확률은 얼마쯤일까요? 1%? 10%? 30%?",
+  c:"동전을 10번 던져 가장 길게 이어진 '뒷면' 횟수를 적기\n이걸 5세트",s:"동전 + 노트",
+  w:"5세트 중 한 번쯤 4~5연속이 나와도 이상하지 않아요.",
+  m:"동전을 10번 던져 5번 이상 연속으로 같은 면이 나올 확률은 약 11%, 20번이면 약 25%예요. 실제 매매는 수십·수백 번이니 긴 연패는 '언젠가 반드시' 와요. 15번 공식대로 1%씩만 걸었다면 5연패도 약 -5%예요. 한 번에 20%씩 걸었다면 5연패에 계좌의 3분의 2가 사라져요(0.8을 다섯 번 곱하면 0.33)."},
+
+ {p:"기업 읽기",t:"비싼 주식 = 큰 회사?",q:"주가가 50만 원인 회사와 5만 원인 회사, 어느 쪽이 더 큰 회사일까요?",
+  c:"관심 기업 두 곳의 주가와 발행주식수를 찾아서\n주가 × 주식수 = 사이트에 나온 시가총액인지 계산",s:"브라우저(Yahoo Finance 등) + 계산기",
+  w:"주가만으로는 알 수 없어요. 회사의 가격은 시가총액이에요.",
+  m:"주가는 회사를 몇 조각으로 나눴느냐에 따라 달라져요. 같은 회사도 주식을 10조각으로 쪼개면(액면분할) 주가는 1/10이 되지만 회사 가치는 그대로예요. 회사끼리 크기를 비교할 땐 시가총액, 한 주가 싼지 비싼지는 23번(PER)으로 봐요."},
+ {p:"기업 읽기",t:"매출에서 순이익까지",q:"매출이 늘면 순이익도 반드시 늘까요?",
+  c:"Yahoo Finance → 관심 기업 → Financials → Income Statement\n매출 → 매출총이익 → 영업이익 → 순이익, 3년치 적기",s:"브라우저 + 노트",
+  w:"단계마다 무엇이 빠지는지 옆에 한 단어씩 적어 보세요.",
+  m:"매출에서 원가를 빼면 매출총이익, 거기서 인건비·광고비·연구비를 빼면 영업이익, 이자와 세금까지 빼면 순이익이에요. 매출이 늘어도 비용이 더 빨리 늘면 이익은 줄어요. '잘 팔고 있나'와 '잘 남기고 있나'는 다른 질문이에요."},
+ {p:"기업 읽기",t:"얼마 남기며 파는가",q:"애플은 100원어치를 팔면 원가를 빼고 몇 원이 남을까요? 10원? 25원? 45원?",
+  c:"19번 표에서 매출총이익 ÷ 매출",s:"계산기",
+  w:"최근 회계연도 기준 46~47원 안팎이에요.",
+  m:"이게 매출총이익률이에요. 같은 업종에서 이 비율이 꾸준히 높다는 건 비싸게 팔 수 있는 힘 — 브랜드, 기술, 독점 같은 '해자'가 있다는 신호예요. 한 해 숫자보다 몇 년 동안 유지되는지가 더 중요해요."},
+ {p:"기업 읽기",t:"이익과 현금은 다르다",q:"순이익이 흑자인 회사는 통장의 현금도 늘었을까요?",
+  c:"같은 회사 Cash Flow 탭 → 영업현금흐름과 순이익 비교\n잉여현금흐름 = 영업현금흐름 - 설비투자(Capital Expenditure)",s:"브라우저 + 계산기",
+  w:"두 숫자가 꽤 달라요. 왜 다른지가 이 카드의 핵심이에요.",
+  m:"회계는 '돈 받을 권리가 생긴 순간'을 매출로 잡아요(발생주의). 외상으로 팔아도 이익은 생기지만 현금은 아직 없어요. 이익은 큰데 현금이 계속 안 들어오는 회사는 위험 신호예요. 잉여현금흐름은 사업을 유지하고도 남는 진짜 여윳돈이에요."},
+ {p:"기업 읽기",t:"빚은 무조건 나쁠까",q:"부채가 많은 회사는 무조건 위험할까요?",
+  c:"Balance Sheet → 총부채(Total Liabilities), 자본(Stockholders' Equity)\n부채비율 = 부채 ÷ 자본",s:"브라우저 + 계산기",
+  w:"숫자만 보지 말고, 21번의 현금흐름으로 그 빚을 감당할 수 있는지 같이 보세요.",
+  m:"빚을 써서 사업을 키우면 잘될 때 수익이 커지고, 안될 때 손실도 커져요(레버리지). 현금이 꾸준히 들어오는 회사의 빚과 적자 회사의 빚은 같은 숫자여도 의미가 달라요. 금리가 오르면 이자 부담 때문에 빚 많은 회사가 먼저 흔들려요."},
+ {p:"기업 읽기",t:"PER 10은 무조건 싸다?",q:"PER 30인 회사와 PER 10인 회사, 10이 무조건 싼 걸까요?",
+  c:"관심 기업 주가 ÷ 주당순이익(EPS)을 직접 계산해서\n사이트에 나온 PER과 같은지 확인",s:"브라우저 + 계산기",
+  w:"값이 다르면 어느 기간 EPS를 썼는지 보세요(최근 4분기 실적 vs 예상치).",
+  m:"PER은 '지금 이익의 몇 년 치를 주고 사느냐'예요. 이익이 빠르게 늘 회사는 지금 PER이 높아도 몇 년 뒤엔 낮아질 수 있고, 이익이 줄 회사는 PER 10도 비싸요. 13번의 닷컴 버블은 이익이 뒷받침 안 된 PER의 결말이었어요. PER은 답이 아니라 '시장이 얼마나 기대하나'를 재는 자예요."},
+ {p:"기업 읽기",t:"회사가 직접 쓴 위험 목록",q:"회사가 '우리 회사의 위험 요인'을 스스로 적어서 공개할까요?",
+  c:"SEC EDGAR(sec.gov)에서 관심 기업 검색 → 최신 10-K\n→ Item 1A. Risk Factors 처음 세 개를 한 줄씩 요약",s:"브라우저 + 노트",
+  w:"영어가 길면 AI에게 요약을 시키되, 원문 한 단락은 직접 읽고 요약과 대조하세요.",
+  m:"미국 상장사는 매년 10-K라는 사업보고서를 의무로 공시하고, 알면서 숨기면 법적 책임을 져요. Item 1A에는 회사가 아는 위험이 적혀 있어요. 뉴스는 지난 일을 말하지만, 이 목록은 앞으로 무엇이 회사를 흔들 수 있는지를 회사 입으로 말해요."},
+
+ {p:"차트와 규칙",t:"지지와 저항",q:"같은 가격대에서 세 번 반등한 주식, 네 번째도 반등할까요?",
+  c:"SPY 일봉 → 최근 1년에서 여러 번 반등한 가격대에 가로선 긋기",s:"TradingView",
+  w:"반등한 곳과 뚫고 내려간 곳을 둘 다 찾아보세요.",
+  m:"사람들이 그 가격을 기억하고 근처에 매수 주문을 몰아 두기 때문에 반등이 잦아져요. 일종의 자기실현적 현상이에요. 하지만 보장은 아니고, 뚫리면 오히려 그 가격이 저항이 돼요. 그래서 지지선은 '사는 이유'보다 '틀렸을 때 나갈 자리(손절)'로 더 쓸모 있어요."},
+ {p:"차트와 규칙",t:"200일 이동평균선",q:"주가가 200일 이동평균선 위에 있다는 건 무슨 뜻일까요?",
+  c:"지표 → Moving Average, 길이 200\nSPY와 관심 종목에 적용해서 최근 1년의 위/아래 구간 보기",s:"TradingView",
+  w:"12번의 2008년 구간에도 적용해 보세요.",
+  m:"200일 이동평균은 최근 200거래일(약 10개월) 종가의 평균, 그 기간에 산 사람들의 대략적인 평균 단가예요. 주가가 그 위면 대부분이 수익 중이라 팔 압력이 적고, 아래면 대부분이 손실 중이에요. 그래서 '추세가 살아 있나'를 거르는 필터로 써요. 예측이 아니라 지금 상태의 요약이에요."},
+ {p:"차트와 규칙",t:"거래량이 말해 주는 것",q:"가격은 오르는데 거래량이 계속 줄고 있다면, 좋은 신호일까요?",
+  c:"거래량 지표를 켜고, 최근 급등 구간 하나에서\n오른 날 거래량이 평소보다 컸는지 보기",s:"TradingView",
+  w:"돌파한 날 거래량이 평소보다 컸는지가 핵심이에요.",
+  m:"거래량은 그 가격에 얼마나 많은 사람이 동의했는지예요. 큰 거래량과 함께 오르면 많은 돈이 들어왔다는 뜻이고, 적은 거래량으로 오르면 소수만 움직인 거라 쉽게 되돌아갈 수 있어요. 가격이 '무엇'이라면 거래량은 '얼마나 확신하나'예요."},
+ {p:"차트와 규칙",t:"모의매매 첫 진입",q:"사기 전에 손절가를 정하지 않으면, 떨어질 때 무슨 일이 생길까요?",
+  c:"페이퍼 트레이딩(가상 계좌)에서, 주문 전에 노트에 먼저:\n진입가, 손절가, 목표가, 15번 공식으로 계산한 수량, 산 이유\n→ 그다음에 주문",s:"TradingView + 노트",
+  w:"순서가 핵심이에요. 노트 먼저, 주문은 나중.",
+  m:"사고 나면 그 주식이 '내 것'이 돼서 판단이 흐려져요(보유 효과). 떨어지면 '곧 오르겠지', 더 떨어지면 '지금 팔면 손해 확정'이 되면서 작은 손실이 큰 손실로 자라요. 산 뒤의 나보다 사기 전의 내가 더 냉정해요. 그래서 나갈 자리를 들어가기 전에 정해요."},
+ {p:"차트와 규칙",t:"매매 복기",q:"수익 난 매매는 다 잘한 매매일까요?",
+  c:"모의매매 최소 3건을 노트에 2×2 표로 분류:\n규칙대로 했나(예/아니오) × 결과(수익/손실)",s:"노트",
+  w:"'규칙을 어겼는데 수익'이 가장 위험한 칸이에요.",
+  m:"결과와 결정을 떼어 봐야 배울 수 있어요. 규칙을 어기고 운으로 번 경험은 다음에 또 어기게 만들어요. 반대로 규칙대로 했는데 손실이면 실수가 아니라 비용이에요(17번처럼 연패는 정상). 복기는 '돈을 벌었나'가 아니라 '정한 대로 했나'를 보는 시간이에요."},
+ {p:"차트와 규칙",t:"모의매매 성과를 숫자로",q:"모의매매 승률이 낮으면 그 방법은 버려야 할까요?",
+  c:"매매일지 시트에서 승률, 평균 수익%, 평균 손실%를 구하고\n16번과 같은 수식으로 기대값 계산",s:"스프레드시트 (매매일지)",
+  w:"10건 미만이면 숫자를 너무 믿지 마세요.",
+  m:"16번에서 봤듯이 승률 하나로는 판단할 수 없어요. 기대값이 플러스면 승률이 낮아도 남는 방식이에요. 다만 몇 건 안 되는 기록은 운의 영향이 커서, '맞다'가 아니라 '아직은 이렇게 보인다' 정도로 읽어요."},
+
+ {p:"코인",t:"비트코인은 누가 승인하나",q:"은행 없이 비트코인 송금이 진짜인지 누가 확인할까요?",
+  c:"비트코인 백서(bitcoin.org/bitcoin.pdf, 한국어 번역본도 있음)\n초록과 1장만 읽기",s:"브라우저",
+  w:"9쪽짜리예요. 오늘은 첫 페이지만.",
+  m:"수많은 컴퓨터(채굴자)가 거래 묶음(블록)을 붙일 권리를 두고 계산 경쟁을 해요(작업증명). 이긴 쪽이 블록을 붙이고, 나머지는 규칙에 맞는지 검사해요. 과거 기록을 고치려면 그 뒤의 계산을 전부 다시 해야 해서 사실상 불가능해요. 신뢰를 기관 대신 계산 비용으로 만든 거예요."},
+ {p:"코인",t:"거래소에 둔 코인은 내 것?",q:"거래소 앱에 보이는 내 코인, 거래소가 망하면 돌려받을 수 있을까요?",
+  c:"'FTX 파산 고객 자산'을 검색해서 무슨 일이 있었는지 세 줄 요약",s:"브라우저 + 노트",
+  w:"국내 거래소는 2024년부터 법으로 고객 예치금 분리 보관이 의무지만, 원리는 같으니 알아 두세요.",
+  m:"거래소에 맡기면 실제 코인은 거래소 지갑에 있고, 앱에 보이는 건 '받을 권리'예요. 거래소가 고객 자산을 다른 데 쓰다 망하면 그 권리가 휴지가 될 수 있어요. 2022년 FTX가 그 사례예요. 'Not your keys, not your coins' — 열쇠(개인키)가 내게 없으면 내 코인이 아니라는 말이 여기서 나왔어요."},
+ {p:"코인",t:"코인 보안 체크리스트",q:"시드 문구를 휴대폰 사진으로 찍어 클라우드에 두면 안전할까요?",
+  c:"노트에 체크리스트:\n거래소 2단계 인증(OTP 앱), 출금 주소 등록 제한,\n시드 문구는 종이에만, 피싱 링크 구분법, 코인 비중 상한(%)",s:"노트",
+  w:"지금 계좌가 없어도 4월 29일 가입 직후에 바로 쓸 목록이에요.",
+  m:"시드 문구는 지갑 전체를 복원하는 마스터 열쇠라, 아는 사람이 곧 주인이에요. 클라우드·사진·메신저는 해킹되면 그대로 털려요. 코인은 한 번 보내면 되돌릴 방법이 없어서 보안 사고가 곧 영구 손실이에요. 14번의 변동성을 생각해 비중 상한도 여기 같이 적어요."},
+ {p:"코인",t:"코인 세금, 지금 상태 확인",q:"2027년에 코인으로 번 돈에 세금이 붙을까요?",
+  c:"'가상자산 과세 2027' 최신 뉴스와 국세청 안내 확인\n→ 시행 여부, 공제 금액, 세율 세 줄",s:"브라우저 + 노트",
+  w:"제가 아는 건 '2027년 1월 시행 예정, 연 250만 원 공제 후 22%'까지예요. 여러 번 미뤄진 제도라 지금 상태는 직접 확인하세요.",
+  m:"세금은 수익에서 바로 빠져서, 같은 수익이라도 손에 쥐는 돈이 달라져요. 그리고 법은 바뀌어요. 그래서 외워 두기보다 어디서 확인하는지 아는 게 중요해요. 이 카드의 진짜 목표는 국세청과 공식 발표를 찾아가는 길을 익히는 거예요."},
+
+ {p:"4월 29일 준비",t:"증권사 고르기",q:"수수료가 제일 싼 증권사가 무조건 제일 좋을까요?",
+  c:"증권사 2~3곳 비교표:\n해외주식 수수료, 환전 비용, 가입 절차, 예약·손절 주문 지원",s:"브라우저 + 노트",
+  w:"11번에서 구한 왕복 비용으로 비교하세요. 이벤트 수수료는 기간이 끝나면 바뀌어요.",
+  m:"비용은 매번 빠지니 중요하지만, 장기 보유가 중심이면 수수료보다 환전 비용과 앱에서 실수하지 않는 게 더 클 수 있어요. 손절 주문(스톱)을 걸 수 있는지도 보세요. 28번에서 정한 규칙을 실제로 걸 수 있어야 하니까요."},
+ {p:"4월 29일 준비",t:"가입 조건과 순서",q:"4월 29일 당일에 증권 계좌와 코인 거래소를 둘 다 바로 만들 수 있을까요?",
+  c:"쓸 증권사와 거래소의 가입 조건(나이, 본인 인증, 연결 은행 계좌) 확인\n→ 준비물과 순서 목록",s:"브라우저 + 노트",
+  w:"거래소는 만 19세부터 가입되는 곳이 많아요. 연결 은행 계좌를 새로 만들어야 하면 며칠이 걸릴 수 있어요.",
+  m:"국내 코인 거래소는 지정된 은행의 실명 계좌와 연결돼야 원화 입출금이 돼요. 은행 계좌를 새로 만들어야 하면 짧은 기간에 여러 계좌를 못 만드는 제한(흔히 20영업일)에 걸릴 수 있어서, 당일에 다 안 될 수 있어요. 순서를 미리 짜 두면 D-day가 덜 허둥대요."},
+ {p:"4월 29일 준비",t:"규칙서 v1.0",q:"규칙서에 반드시 '숫자'로 들어가야 하는 항목은 뭘까요?",
+  c:"노트에 규칙서:\n① 5번의 세 줄  ② 장기/스윙/코인 비중(%)\n③ 1회 최대 손실(15번)  ④ 진입·손절 조건(28번)\n⑤ 코인 상한·보안(33번)  ⑥ 연패하면 쉬는 규칙",s:"노트",
+  w:"앞에서 만든 숫자를 모으는 카드예요. 새로 생각할 건 ⑥ 하나뿐.",
+  m:"숫자가 없는 규칙은 어겨도 티가 안 나서 규칙이 아니에요. '조심해서 산다'는 규칙이 아니고 '1회 손실 전체의 1% 이하'는 규칙이에요. 이 문서가 4월 29일 이후 감정 대신 결정을 내려 줘요."},
+ {p:"4월 29일 준비",t:"첫 달 계획",q:"4월 29일에 투자 가능 금액을 전부 넣어야 할까요?",
+  c:"노트: 첫 달에 넣을 금액(3번 금액의 일부),\n첫 매수 후보(장기 ETF부터), 3개월 뒤 점검 날짜",s:"노트",
+  w:"처음 3개월은 작은 돈으로 규칙이 실제로 지켜지는지 보는 기간이에요.",
+  m:"모의매매와 실제 돈은 감정의 무게가 달라요. 가상의 -10%는 담담해도 실제 -10%는 손이 떨려요. 그래서 작게 시작해 규칙을 지킬 수 있는지 먼저 확인하고, 30번의 모의매매 성과와 비교한 뒤 늘려요. 4월 29일은 결승선이 아니라 출발선이에요."}
 ];
-const END="2027-04-29", KEY="invplan-v1";
-const DOW=["월","화","수","목","금","토","일"];
+const END="2027-04-29", KEY="invq-v1";
 const pad=n=>String(n).padStart(2,"0");
 const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 const parse=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
-let done={};try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){done={}}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}};
-const days=[];
-W.forEach((w,wi)=>{const st=parse(w.s);const mins=w.m==="vac"?VAC:w.m==="exam"?EXAM:SEM;
-  w.d.forEach((t,i)=>{const d=new Date(st);d.setDate(st.getDate()+i);const k=iso(d);if(k>END)return;
-    let txt=t; if(txt==null) txt=(i===1?TUE:SAT);
-    let m=mins[i]; if(w.m==="hol") m=(i>=3&&i<=5)?60:SEM[i];
-    days.push({k,d,txt,m,wi,dow:i});});});
-const todayK=iso(new Date());
-const todayIdx=(()=>{const i=days.findIndex(x=>x.k===todayK);if(i>=0)return i;return todayK<days[0].k?0:days.length-1})();
+// 완료한 카드는 done에, 남은 순서는 order에. 미루면 order 맨 뒤로 — 기록은 남지 않아요.
+function load(){
+  try{const s=JSON.parse(localStorage.getItem(KEY));
+    if(s&&Array.isArray(s.done)&&Array.isArray(s.order))return s;}catch(e){}
+  return {done:[],order:C.map((_,i)=>i)};
+}
+let S=load();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+function complete(){const i=S.order.shift();if(i===undefined)return;S.done.push(i);save();render();}
+function later(){if(S.order.length<2)return;S.order.push(S.order.shift());save();render();}
+function render(){
+  const days=Math.round((parse(END)-parse(iso(new Date())))/864e5), left=S.order.length;
+  document.getElementById("dd").textContent=days>0?`D-${days}`:days===0?"D-DAY":"시작함";
+  document.getElementById("sub").textContent=left===0?"카드를 다 끝냈어요"
+    :days>=left?`남은 카드 ${left}장 · ${Math.floor(days/left)}일에 한 장이면 충분해요`:`남은 카드 ${left}장`;
+  document.getElementById("n").textContent=S.done.length+1; // 9월의 6일을 1개로 인정
+  const log=document.getElementById("log");log.innerHTML="";
+  const li0=document.createElement("li");li0.textContent="9월에 6일 — 첫 주 세팅과 『돈의 심리학』 시작";log.appendChild(li0);
+  S.done.forEach(i=>{const li=document.createElement("li");li.textContent=C[i].t;log.appendChild(li);});
+  const card=document.getElementById("card"), i=S.order[0];
+  if(i===undefined){card.innerHTML='<p class="empty">38장 전부 해냈어요.</p><p class="why">규칙서와 첫 달 계획이 손에 있어요. 4월 29일은 출발선이에요.</p>';return;}
+  card.innerHTML='<p class="n"></p><p class="task"></p>'
+    +'<span class="lbl">① 먼저 답을 정해 보세요</span><p class="q"></p>'
+    +'<span class="lbl">② 직접 확인하기</span><span class="where"></span><code class="cmd"></code><p class="why"></p>'
+    +'<span class="lbl">③ 왜 그런지 — 확인한 다음에 읽으세요</span><p class="mech"></p>'
+    +'<div class="acts"><button class="btn go" id="ok">확인했어요</button><button class="btn ghost" id="lt">오늘은 말고</button></div>';
+  const x=C[i];
+  card.querySelector(".n").textContent=`${x.p} · ${i+1}번`;
+  card.querySelector(".task").textContent=x.t;
+  card.querySelector(".q").textContent=x.q;
+  card.querySelector(".where").textContent="어디서: "+x.s;
+  card.querySelector(".cmd").textContent=x.c;
+  card.querySelector(".why").textContent=x.w;
+  card.querySelector(".mech").textContent=x.m;
+  document.getElementById("ok").onclick=complete;
+  document.getElementById("lt").onclick=later;
+}
+render();
 
-function renderHead(){
-  const diff=Math.round((parse(END)-parse(todayK))/864e5);
-  document.getElementById("dd").textContent=diff>0?`D-${diff}`:diff===0?"D-DAY":"완료";
-  const n=days.filter(x=>done[x.k]).length;
-  document.getElementById("ddsub").textContent=`${days.length}일 중 ${n}일 완료`;
-  const tape=document.getElementById("tape");tape.innerHTML="";
-  days.forEach((x,i)=>{const b=document.createElement("button");
-    b.className=(done[x.k]?"ok":x.k<todayK?"past":"")+(i===todayIdx&&x.k===todayK?" now":"");
-    b.setAttribute("aria-label",`${x.d.getMonth()+1}월 ${x.d.getDate()}일 ${done[x.k]?"완료":""}`);
-    b.onclick=()=>jump(x);tape.appendChild(b);});
+if(location.search==="?test"){ // 큐 동작과 카드 데이터 자체 점검
+  const keep=S;S={done:[],order:[0,1,2]};
+  complete();console.assert(S.done.join()==="0"&&S.order.join()==="1,2","완료 시 앞에서 빠져 done으로");
+  later();console.assert(S.order.join()==="2,1"&&S.done.length===1,"미루면 맨 뒤로, 완료로 세지 않음");
+  S={done:[],order:[0]};later();console.assert(S.order.join()==="0","마지막 한 장은 미뤄도 그대로");
+  C.forEach((x,i)=>console.assert(x.p&&x.t&&x.q&&x.c&&x.s&&x.w&&x.m,"빈 칸 있는 카드: "+(i+1)));
+  S=keep;render();console.log("self-check 끝");
 }
-function renderToday(){
-  const x=days[todayIdx];const el=document.getElementById("today");
-  const lbl=x.k===todayK?"오늘":x.k>todayK?"첫날":"마지막 날";
-  el.innerHTML=`<h2>${lbl}, ${x.d.getMonth()+1}월 ${x.d.getDate()}일 ${DOW[x.dow]}요일, ${x.m}분</h2>
-  <div class="task"></div><button class="btn ${done[x.k]?"on":""}" id="tbtn">${done[x.k]?"완료함":"완료로 표시"}</button>`;
-  el.querySelector(".task").textContent=x.txt;
-  document.getElementById("tbtn").onclick=()=>toggle(x.k);
-}
-function renderWeeks(){
-  const box=document.getElementById("weeks");box.innerHTML="";
-  W.forEach((w,wi)=>{
-    if(w.p){const h=document.createElement("div");h.className="phase";h.textContent=w.p;box.appendChild(h);}
-    const ds=days.filter(x=>x.wi===wi);const f=ds[0].d,l=ds[ds.length-1].d;
-    const n=ds.filter(x=>done[x.k]).length;
-    const det=document.createElement("details");det.id="w"+wi;
-    if(ds.some(x=>x.k===days[todayIdx].k))det.open=true;
-    const tag=w.m==="exam"?'<span class="tag exam">시험</span>':w.m==="vac"?'<span class="tag vac">방학</span>':w.m==="hol"?'<span class="tag hol">연휴</span>':"";
-    det.innerHTML=`<summary><span class="wk">${wi+1}주</span><span><span class="wt"></span>${tag}<br><span class="wd">${f.getMonth()+1}/${f.getDate()} ~ ${l.getMonth()+1}/${l.getDate()}</span></span><span class="pct">${n}/${ds.length}</span></summary>`;
-    det.querySelector(".wt").textContent=w.t;
-    if(w.n){const p=document.createElement("p");p.className="note";p.textContent=w.n;det.appendChild(p);}
-    const ul=document.createElement("ul");ul.className="days";
-    ds.forEach(x=>{const li=document.createElement("li");li.id="d"+x.k;
-      if(x.k===todayK)li.className="is-today";if(done[x.k])li.classList.add("is-done");
-      const id="c"+x.k;
-      li.innerHTML=`<input type="checkbox" id="${id}" ${done[x.k]?"checked":""}><label class="dl" for="${id}">${x.d.getMonth()+1}/${x.d.getDate()} ${DOW[x.dow]}<small>${x.m}분</small></label><span class="t"></span>`;
-      li.querySelector(".t").textContent=x.txt;
-      li.querySelector("input").onchange=()=>toggle(x.k);
-      ul.appendChild(li);});
-    det.appendChild(ul);box.appendChild(det);});
-}
-function toggle(k){if(done[k])delete done[k];else done[k]=true;save();renderAll();}
-function jump(x){const det=document.getElementById("w"+x.wi);det.open=true;
-  const li=document.getElementById("d"+x.k);li.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});}
-function renderAll(){const open=[...document.querySelectorAll("details[open]")].map(d=>d.id);
-  renderHead();renderToday();renderWeeks();
-  if(open.length)document.querySelectorAll("details").forEach(d=>d.open=open.includes(d.id));}
-document.getElementById("exp").onclick=()=>{const t=days.filter(x=>done[x.k]).map(x=>`${x.k} ${x.txt}`).join("\n")||"완료한 날이 아직 없습니다.";
-  if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>alert("완료 기록을 클립보드에 복사했습니다."),()=>alert(t));else alert(t);};
-document.getElementById("rst").onclick=()=>{if(confirm("완료 기록을 모두 지울까요?")){done={};save();renderAll();}};
-renderHead();renderToday();renderWeeks();
 </script>
 </body>
 </html>
